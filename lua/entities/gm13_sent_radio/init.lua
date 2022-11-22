@@ -61,7 +61,7 @@ function ENT:Initialize()
 	
 	for i = 1, 15 do
 		local rand = math.random(1, 35)
-		table.insert(self.radioSounds, "gm13/radio/sstv/transmission" .. rand .. ".wav")
+		table.insert(self.radioSounds, "gm13/radio/sstv/" .. rand .. ".wav")
 	end
 	
     self.gm13_radio = true
