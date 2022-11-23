@@ -59,8 +59,8 @@ function ENT:Initialize()
         table.insert(self.radioSounds, "ambient/levels/prison/radio_random" .. i .. ".wav")
     end
 	
-	for i = 1, 18 do
-		local rand = math.random(1, 37)
+	for i = 1, 19 do
+		local rand = math.random(1, 39)
 		table.insert(self.radioSounds, "gm13/radio/sstv/" .. rand .. ".wav")
 	end
 	
