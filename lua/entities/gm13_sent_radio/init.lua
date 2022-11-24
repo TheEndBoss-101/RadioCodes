@@ -59,11 +59,6 @@ function ENT:Initialize()
         table.insert(self.radioSounds, "ambient/levels/prison/radio_random" .. i .. ".wav")
     end
 	
-	for i = 1, 19 do
-		local rand = math.random(1, 39)
-		table.insert(self.radioSounds, "gm13/radio/sstv/" .. rand .. ".wav")
-	end
-	
     self.gm13_radio = true
     self.playing = nil
     self.broadcasting = nil
@@ -125,7 +120,9 @@ function ENT:Use(activator)
     self:RemoveMingeAttractor()
 
     if math.random(1, 100) <= 20 then
+		print("Main")
         self.playing = self.main
+		print(self.playing)
 
         if self.playing ~= self.main then -- Beware of sounds containing loops!
             timer.Create("gm13_finish_main_radio", SoundDuration(self.playing), 1, function()
@@ -135,17 +132,25 @@ function ENT:Use(activator)
             end)
         end
     else
-        self.playing = self.radioSounds[math.random(1, #self.radioSounds)]
+		if math.random(1, 100) <= 10 then
+			print("SSTV")
+			self.playing = "gm13/radio/sstv/" .. math.random(1, 39) .. ".wav"
+			print(self.playing)
+		else
+			print("Random")
+			self.playing = self.radioSounds[math.random(1, #self.radioSounds)]
+			print(self.playing)
+			
+			if timer.Exists("gm13_finish_main_radio") then
+				timer.Remove("gm13_finish_main_radio")
+			end
 
-        if timer.Exists("gm13_finish_main_radio") then
-            timer.Remove("gm13_finish_main_radio")
-        end
-
-        if self.playing == "gm13/radio/mingev2glitch.wav" then
-            self.playing = ""
-            self:SetMingeAttractor()
-            return
-        end
+			if self.playing == "gm13/radio/mingev2glitch.wav" then
+				self.playing = ""
+				self:SetMingeAttractor()
+				return
+			end
+		end
     end
 
     self:EmitSound(self.playing)
