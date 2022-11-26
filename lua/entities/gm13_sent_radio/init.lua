@@ -134,7 +134,7 @@ function ENT:Use(activator)
     else
 		if math.random(1, 100) <= 10 then
 			print("SSTV")
-			self.playing = "gm13/radio/sstv/" .. math.random(1, 40) .. ".wav"
+			self.playing = "gm13/radio/sstv/" .. math.random(1, 41) .. ".wav"
 			print(self.playing)
 		else
 			print("Random")
